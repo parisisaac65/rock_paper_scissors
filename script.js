@@ -1,109 +1,90 @@
 
-// function declaration for the computer to randomly return rock paper, or scissors
-function computerPlay(){
-    const options = ['rock', 'paper', 'scissors']; 
-    return options[Math.floor(Math.random() * options.length)]; 
+// declare global variables computerSelection, playerSelection, winner and tie 
+let computerSelection = getComputerChoice(); 
+let playerSelection;
+let winner = '';
+let tie = false; 
+
+// function declaration for the computer to randomly return rock paper, or scissors 
+function getComputerChoice(){
+    const computer_choices = ['rock', 'paper', 'scissors'];
+    return computer_choices[Math.floor(Math.random() * computer_choices.length)]; 
 }
 
-//declare global variables playerWin and playerTie 
-let playerWin; 
-let playerTie; 
-
-//function declaration to play a single round of Rock Paper Scissors
+// function declaration to play a single round of Rock Paper Scissors 
 function playRound(playerSelection, computerSelection){
-    playerWin = false; 
-    playerTie = false;
-
-    //make playSelection parameter case-insensitive 
+    //make playerSelection parameter case-insensitive 
     playerSelection = playerSelection.toLowerCase();
-    if (playerSelection === computerSelection){
-        playerTie = true;
-        return playerTie;
-        //return `TIE! You both entered ${playerSelection}`; 
-    } else if (playerSelection=== 'rock' && computerSelection === 'scissors'){
-        playerWin = true; 
-        // return 'You Win! Rock beats Scissors'; 
-    } else if (playerSelection === 'scissors' && computerSelection === 'rock'){
-        playerWin = false; 
-        // return 'You Lose! Rock beats Scissors';
-    } else if (playerSelection === 'paper' && computerSelection === 'rock'){
-        playerWin = true;  
-        // return 'You Win! Paper beats Rock'; 
-    } else if (playerSelection === 'rock' && computerSelection === 'paper'){
-        playerWin = false; 
-        // return 'You Lose! Paper beats Rock'; 
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper'){
-        playerWin = true; 
-        // return 'You Win! Scissors beat Paper'; 
-    } else if (playerSelection === 'paper' && computerSelection === 'scissors'){
-        playerWin = false; 
-        // return 'You Lose! Scissors beat Paper';
+    // rock beats scissors, paper beats rock , scissors beat paper 
+    if (computerSelection === 'rock' && playerSelection === 'scissors'){
+        winner = 'computer';
+    } else if (computerSelection === 'paper' && playerSelection === 'rock'){
+        winner = 'computer';
+    } else if (computerSelection === 'scissors' && playerSelection === 'paper'){
+        winner = 'computer';
+    } else if (computerSelection === 'scissors' && playerSelection === 'rock'){
+        winner = 'player';
+    } else if (computerSelection === 'rock' && playerSelection === 'paper'){
+        winner = 'player';
+    } else if (computerSelection === 'paper' && playerSelection === 'scissors'){
+        winner = 'player';
+    } else {
+        tie = true; 
     }
-    return playerWin; 
-}
-
-function isValid(playerSelection){
-    if (playerSelection === null || playerSelection !== 'rock' && playerSelection !== 'paper' && playerSelection !== 'scissors'){
-        return false;
-    }
-    return true; 
-}
-
-function showMessage(){
-    if (playerTie) {
-        console.log(`TIE! You both entered ${computerSelection}`);}
-    else if (playerWin) {
-        console.log(`You Win! ${playerSelection} beat(s) ${computerSelection}`);}
-    else{
-        console.log(`You Lose! ${computerSelection} beat(s) ${playerSelection}`);}
+    return winner;
 }
 
 
-// function declaration to play a 5 round game that keeps score and reports winner or loser at end 
+// function declaration to display the results after each game played 
+function showRoundMessage(){
+    // display the results of each round 
+    if (winner === 'computer'){
+        console.log(`You Lose This Round! ${computerSelection} beats ${playerSelection}`); 
+    } else if (winner === 'player'){
+        console.log(`You Win This Round! ${playerSelection} beats ${computerSelection}`);
+    } else if (tie === true){
+        console.log("It's a Tie!");
+    } 
+}
+
+// function declaration to display the results of the final winner of game 
+function showGameMessage(){
+        // display the results of the final winner 
+        if (computerScore > playerScore){
+            console.log(`Final Winner: Computer. Score ${computerScore} : ${playerScore}`);
+        } else if (computerScore < playerScore){
+            console.log(`Final Winner: Player. Score ${playerScore} : ${computerScore}`);
+        } else {
+            console.log(`TIE. No one wins. Score ${computerScore} : ${playerScore}`); 
+        }
+}
+
+// create two score variables: one for player and one for computer 
+let playerScore = 0; 
+let computerScore = 0;  
+
+// function declaration to play a 5 round game that keeps score and reports winner or loser at end
 function game(){
-    // create two score variables: one for computer and one for user 
-    let playerScore = 0; 
-    let computerScore = 0; 
-    // use for loop to play 5 rounds 
-    for (let i = 1; i < 6; i++){
-    //call playRound function inside for loop 
-        playerSelection = prompt('Please enter rock, paper, scissors to play: ');
-        if (isValid(playerSelection)) {
-            playerSelection = playerSelection;
-        }
-        else {
-            playerSelection = prompt('INVALID: Please enter rock, paper, scissors to play: ');
-        }
-        computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-        showMessage(); 
- 
-    //if player wins, increment the playerScore by 1 
-        if (playerWin){
-            playerScore++;
-    //if computer wins, increment the computerScore by 1 
-        } else if (playerWin === false && playerTie === false) {
-            computerScore++; 
+    // use a for loop to play 5 rounds 
+    for (let i = 0; i < 5; i++){
+        // let playerSelection = prompt('Please enter rock, paper, or scissors'); 
+        playerSelection = prompt('Please enter rock, paper, or scissors'); 
+        computerSelection = getComputerChoice();
+        // call playRound function inside for loop 
+        playRound(playerSelection,computerSelection);
+        // if computer wins, increment the computerScore by 1
+        if (winner === 'computer'){
+            computerScore += 1;
+        // if player wins, increment the playerScore by 1 
+        } else if (winner === 'player'){
+            playerScore += 1; 
         } 
-    //display the results of each round
-        console.log(`Round: ${i} Player Score: ${playerScore}   Computer Score: ${computerScore}`); 
+        showRoundMessage(); 
     }
+    showGameMessage(); 
 
-    //display the results of the final winner 
-    if (playerScore > computerScore){
-        console.log('Final Winner: YOU!');
-    }
-    else if (playerScore < computerScore){
-        console.log('Final Winner: Computer!');
-    }
-    else if (playerScore === computerScore){
-        console.log('No Winner. TIED');
-    }
+    
 }
 
-
-
-// Ask the user to input either rock, paper, or scissors 
-// let playerSelection = prompt('Please enter rock, paper, scissors to play: ');
-// let computerSelection = computerPlay();
-console.log(game()); 
+// call the game function 
+game(); 
