@@ -13,6 +13,11 @@ score.classList.toggle('score');
 const finalScore = document.createElement('div');
 finalScore.classList.toggle('finalScore'); 
 
+round.style.cssText = 'color: white; font-size: 20px;';
+content.style.cssText = 'color: white'; 
+score.style.cssText = 'color: white';
+finalScore.style.cssText = 'color: white; font-size: 30px;'; 
+
 
 let computerSelection; 
 let playerSelection;
@@ -115,7 +120,6 @@ scissorsBtn.addEventListener('click', () => {
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click',() => {
-        // playRound(playerSelection,computerSelection);
         showRoundMessage();
     })
 })
