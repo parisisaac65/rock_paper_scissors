@@ -1,6 +1,9 @@
 
 const container = document.querySelector('#container');
 
+const round = document.createElement('div');
+round.classList.toggle('round');
+
 const content = document.createElement('div');
 content.classList.toggle('content');
 
@@ -17,6 +20,7 @@ let winner = '';
 let playerScore = 0; 
 let computerScore = 0;
 let finalWinner = '';
+let currRound = 0; 
 
 // function declaration for the computer to randomly return rock paper, or scissors 
 function getComputerChoice(){
@@ -27,6 +31,7 @@ function getComputerChoice(){
 // function declaration to play a single round of Rock Paper Scissors 
 function playRound(playerSelection, computerSelection){
     // rock beats scissors, paper beats rock , scissors beat paper 
+    currRound +=1; 
     if (computerSelection === 'rock' && playerSelection === 'scissors'){
         winner = 'computer';
     } else if (computerSelection === 'paper' && playerSelection === 'rock'){
@@ -42,6 +47,8 @@ function playRound(playerSelection, computerSelection){
     } else {
         winner = 'tie'
     }
+    round.textContent = `Round: ${currRound}`; 
+    container.appendChild(round);
     return winner; 
 }
 
@@ -61,11 +68,12 @@ function showRoundMessage(){
     
     score.textContent = `Computer Score ${computerScore} : Player Score ${playerScore}`; 
 
+    // container.appendChild(round);
     container.appendChild(content);
     container.appendChild(score);
     
     if (computerScore === 5 || playerScore === 5){
-        showGameMessage(); 
+        showGameMessage();
     }
 }
 
@@ -75,10 +83,8 @@ function showGameMessage(){
     // display the results of the final winner 
     if (computerScore === 5){
         finalScore.textContent = 'Final Winner: Computer'; 
-        // console.log('FW: Computer'); 
     } else if (playerScore === 5){
         finalScore.textContent = 'Final Winner: Player';
-        // console.log('FW: Player');
     } 
     container.appendChild(finalScore);
 } 

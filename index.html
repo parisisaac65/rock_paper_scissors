@@ -4,13 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet"href="style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <button class = "rockBtn">Rock</button>
-    <button class = "paperBtn">Paper</button>
-    <button class  = "scissorsBtn">Scissors</button>
+    <div class = "header">
+        <div class = "top">Rock, Paper, Scissors
+            <img src = "rock-paper-scissors.png" alt = "Picture of Rock, Paper, Scissors" width = "20%" height = "10%">
+        </div>
+        <div class = "bottom">
+            <p>This childhood game originated in China and is renowned for its ability to settle
+                disbutes between two people</p>
+            <p>Here are the rules:</p>
+            <li>Rock beats Scissors</li>
+            <li>Paper beats Rock</li>
+            <li>Scissors beats Paper</li>
+            <p><br><br>Choose either Rock, Paper or Scissors below to begin playing</p>
+        </div>
+    </div>
+    
+    <div class = "buttons">
+        <button class = "rockBtn"><img src="rock.png"></button>
+        <button class = "paperBtn"><img src="paper.png"></button>
+        <button class  = "scissorsBtn"><img src="scissors.png"></button>
+    </div>
+
     <div id="container"></div>
     <!-- <script src="script.js"></script> -->
 
