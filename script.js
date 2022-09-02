@@ -18,6 +18,14 @@ content.style.cssText = 'color: white';
 score.style.cssText = 'color: white';
 finalScore.style.cssText = 'color: white; font-size: 30px;'; 
 
+const btn = document.createElement('button');
+const txt = document.createTextNode('Play Again');
+btn.appendChild(txt);
+btn.addEventListener('click',resetForm);
+
+function resetForm(){
+    document.getElementById("myForm").reset(); 
+}
 
 let computerSelection; 
 let playerSelection;
@@ -79,6 +87,7 @@ function showRoundMessage(){
     
     if (computerScore === 5 || playerScore === 5){
         showGameMessage();
+        container.appendChild(btn);
     }
 }
 
