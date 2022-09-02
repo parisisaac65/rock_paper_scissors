@@ -21,6 +21,7 @@ finalScore.style.cssText = 'color: white; font-size: 30px;';
 const btn = document.createElement('button');
 const txt = document.createTextNode('Play Again');
 btn.appendChild(txt);
+btn.style.cssText= 'height: 25px; width: 40; font-weight:bold;';
 btn.addEventListener('click',resetForm);
 
 function resetForm(){
